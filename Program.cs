@@ -1,7 +1,12 @@
+using EagerLoadingInAsp.netCoreWebAPI.ApplicationDbContext;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
 // Add services to the container.
-
+builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
